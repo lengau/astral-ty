@@ -1,0 +1,49 @@
+name: astral-ty # you probably want to 'snapcraft register <name>'
+base: core24 # the base snap is the execution environment for this snap
+adopt-info: ty
+summary:  An extremely fast Python type checker and language server, written in Rust.
+description: |
+  An extremely fast Python type checker and language server, written in Rust.
+
+  # Warning
+
+  ty is in preview and is not ready for production use.
+
+  We're working hard to make ty stable and feature-complete, but until then,
+  expect to encounter bugs, missing features, and fatal errors.
+
+grade: devel # must be 'stable' to release into candidate/stable channels
+confinement: strict
+
+platforms:
+  # Just the ones I can test on for now :-)
+  amd64:
+  arm64:
+  riscv64:
+
+parts:
+  uv-deps:
+    plugin: nil
+    build-snaps:
+      - astral-uv
+    build-packages:
+      - python3-maturin
+  ty:
+    after: [uv-deps]
+    plugin: uv
+    source: https://github.com/astral-sh/ty.git
+    source-branch: main
+    source-depth: 0
+    source-submodules:
+      - ruff
+    override-build: |
+      craftctl default
+      craftctl set "version=$(git describe --tags)"
+
+apps:
+  ty:
+    command: bin/ty
+    plugs:
+      - home
+      - removable-media
+
