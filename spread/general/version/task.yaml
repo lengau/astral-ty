@@ -1,0 +1,4 @@
+summary: Test that the ty snap installs and can output a version.
+
+execute: |
+  astral-ty.ty --version
