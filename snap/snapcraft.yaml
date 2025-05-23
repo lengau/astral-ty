@@ -26,8 +26,10 @@ parts:
     plugin: nil
     build-snaps:
       - astral-uv
+      - rustup
     build-packages:
       - python3-maturin
+      - python3.12-dev
   ty:
     after: [uv-deps]
     plugin: uv
