@@ -30,6 +30,8 @@ parts:
     build-packages:
       - python3-maturin
       - python3.12-dev
+    override-build: |
+      rustup default stable
   ty:
     after: [uv-deps]
     plugin: uv
