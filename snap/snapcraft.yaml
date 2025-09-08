@@ -40,6 +40,12 @@ parts:
     source-depth: 0
     source-submodules:
       - ruff
+    build-environment:
+      # See: https://github.com/lengau/uv-snap/issues/10
+      - to arm64:
+        - JEMALLOC_SYS_WITH_LG_PAGE: "16"
+      - to ppc64el:
+        - JEMALLOC_SYS_WITH_LG_PAGE: "16"
     override-build: |
       craftctl default
       craftctl set "version=$(git describe --tags)"
