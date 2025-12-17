@@ -1,6 +1,6 @@
 name: astral-ty # you probably want to 'snapcraft register <name>'
 base: core24 # the base snap is the execution environment for this snap
-adopt-info: ty
+version: 0.0.2
 summary:  An extremely fast Python type checker and language server, written in Rust.
 description: |
   An extremely fast Python type checker and language server, written in Rust.
@@ -36,8 +36,7 @@ parts:
     after: [uv-deps]
     plugin: uv
     source: https://github.com/astral-sh/ty.git
-    source-branch: main
-    source-depth: 0
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
     source-submodules:
       - ruff
     build-environment:
@@ -46,9 +45,6 @@ parts:
         - JEMALLOC_SYS_WITH_LG_PAGE: "16"
       - to ppc64el:
         - JEMALLOC_SYS_WITH_LG_PAGE: "16"
-    override-build: |
-      craftctl default
-      craftctl set "version=$(git describe --tags)"
 
 apps:
   ty:
