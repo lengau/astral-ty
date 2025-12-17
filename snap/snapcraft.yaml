@@ -1,5 +1,5 @@
 name: astral-ty # you probably want to 'snapcraft register <name>'
-base: core24 # the base snap is the execution environment for this snap
+base: core26 # the base snap is the execution environment for this snap
 adopt-info: ty
 summary:  An extremely fast Python type checker and language server, written in Rust.
 description: |
@@ -22,19 +22,11 @@ platforms:
   riscv64:
 
 parts:
-  uv-deps:
-    plugin: nil
-    build-snaps:
-      - astral-uv
-      - rustup
-    build-packages:
-      - python3-maturin
-      - python3.12-dev
-    override-build: |
-      rustup default stable
   ty:
-    after: [uv-deps]
-    plugin: uv
+    plugin: rust
+    rust-channel: stable
+    rust-path:
+      - ruff/crates/ty
     source: https://github.com/astral-sh/ty.git
     source-branch: main
     source-depth: 0
