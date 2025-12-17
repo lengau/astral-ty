@@ -1,9 +1,9 @@
 name: Cachebust
-# Make Launchpad re-build the snap daily
+# Make Launchpad re-build the snap regularly
 
 on:
   schedule:
-    - cron: "0 10 * * *"
+    - cron: "0 * * * *"
   workflow_dispatch:
 
 permissions:
@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: main  # Main branch goes to edge channel
       - run: |
           date > .cachebust
           git add .cachebust
