@@ -1,6 +1,6 @@
 name: astral-ty # you probably want to 'snapcraft register <name>'
 base: core24 # the base snap is the execution environment for this snap
-version: null
+version: 0.0.15
 summary:  An extremely fast Python type checker and language server, written in Rust.
 description: |
   An extremely fast Python type checker and language server, written in Rust.
