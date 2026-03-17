@@ -14,6 +14,7 @@ suites:
   spread/general/:
     summary: General integration tests
     prepare: |
+      snap install --edge core26
       snap install "$CRAFT_ARTIFACT" --dangerous --jailmode
     restore: |
       snap remove astral-ty --purge

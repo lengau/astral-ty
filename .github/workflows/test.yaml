@@ -1,0 +1,33 @@
+name: Test the snap
+# Make Launchpad re-build the snap daily
+
+on:
+  push:
+    branches:
+      - main
+      - beta
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  snapcraft-test:
+    strategy:
+      matrix:
+        system:
+          - ubuntu-latest
+          - ubuntu-24.04-arm
+    runs-on: ${{ matrix.system }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - run: |
+          if ! which snap; then
+            sudo apt-get update && sudo apt-get --yes install snapd
+          fi
+      - name: Set up Snapcraft
+        uses: canonical/craft-actions/snapcraft/setup@main
+      - run: snapcraft test
+
