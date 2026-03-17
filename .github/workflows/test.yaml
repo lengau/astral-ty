@@ -19,7 +19,6 @@ jobs:
         system:
           - ubuntu-latest
           - ubuntu-24.04-arm
-          - visionfive2
     runs-on: ${{ matrix.system }}
     steps:
       - name: Checkout
